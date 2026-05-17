@@ -1,0 +1,15 @@
+services:
+  ros_dev:
+    build: .
+    container_name: ros2_jazzy_dev
+    network_mode: host
+    environment:
+      - DISPLAY=${DISPLAY}
+      - QT_X11_NO_MITSHM=1
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - .:/ros2_ws/src/ros2_experiments
+    stdin_open: true
+    tty: true
+    privileged: true
+    ipc: host

@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://wiki.ros.org/xacro" name="ur5_scene">
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="ur5_robot">
    <!-- robot name parameter -->
    <xacro:arg name="name" default="ur"/>
    <xacro:arg name="tf_prefix" default="" />
@@ -21,127 +21,71 @@
    <xacro:arg name="safety_pos_margin" default="0.15"/>
    <xacro:arg name="safety_k_position" default="20"/>
 
-   <!-- create link fixed to world -->
-   <link name="world" />
+   <!-- Robot parent link -->
+   <link name="world"/>
 
-   <!-- Suelo -->
-   <link name="floor">
-     <visual>
-       <origin xyz="0 0 -0.01" rpy="0 0 0"/>
-       <geometry><box size="4.0 4.0 0.02"/></geometry>
-       <material name="grey"><color rgba="0.7 0.7 0.7 1"/></material>
-     </visual>
-     <collision name="floor_collision">
-       <origin xyz="0 0 -0.01" rpy="0 0 0"/>
-       <geometry><box size="4.0 4.0 0.02"/></geometry>
-     </collision>
-     <inertial>
-       <mass value="100.0"/>
-       <origin xyz="0 0 0" rpy="0 0 0"/>
-       <inertia ixx="133.3" ixy="0" ixz="0" iyy="133.3" iyz="0" izz="266.6"/>
-     </inertial>
-   </link>
-
-   <joint name="world_to_floor" type="fixed">
-     <parent link="world"/>
-     <child link="floor"/>
-     <origin xyz="0 0 0" rpy="0 0 0"/>
-   </joint>
-
-   <!-- Silla 1 (Donde está el robot) -->
-   <link name="chair_1">
-     <visual>
-       <origin xyz="0 0 0.25" rpy="0 0 0"/>
-       <geometry><box size="0.4 0.4 0.5"/></geometry>
-       <material name="brown"><color rgba="0.6 0.4 0.2 1"/></material>
-     </visual>
-     <collision name="chair_1_collision">
-       <origin xyz="0 0 0.25" rpy="0 0 0"/>
-       <geometry><box size="0.4 0.4 0.5"/></geometry>
-     </collision>
-     <inertial>
-       <mass value="5.0"/>
-       <origin xyz="0 0 0.25" rpy="0 0 0"/>
-       <inertia ixx="0.17" ixy="0" ixz="0" iyy="0.17" iyz="0" izz="0.13"/>
-     </inertial>
-   </link>
-
-   <joint name="world_to_chair_1" type="fixed">
-     <parent link="world"/>
-     <child link="chair_1"/>
-     <origin xyz="0 0 0" rpy="0 0 0"/>
-   </joint>
-
-   <!-- Silla 2 (Donde está el cubo) -->
-   <link name="chair_2">
-     <visual>
-       <origin xyz="0 0 0.25" rpy="0 0 0"/>
-       <geometry><box size="0.4 0.4 0.5"/></geometry>
-       <material name="brown_light"><color rgba="0.7 0.5 0.3 1"/></material>
-     </visual>
-     <collision name="chair_2_collision">
-       <origin xyz="0 0 0.25" rpy="0 0 0"/>
-       <geometry><box size="0.4 0.4 0.5"/></geometry>
-     </collision>
-     <inertial>
-       <mass value="5.0"/>
-       <origin xyz="0 0 0.25" rpy="0 0 0"/>
-       <inertia ixx="0.17" ixy="0" ixz="0" iyy="0.17" iyz="0" izz="0.13"/>
-     </inertial>
-   </link>
-
-   <joint name="world_to_chair_2" type="fixed">
-     <parent link="world"/>
-     <child link="chair_2"/>
-     <origin xyz="0.8 0 0" rpy="0 0 0"/>
-   </joint>
-
-   <!-- El Cubo -->
-   <link name="cube">
-     <visual>
-       <origin xyz="0 0 0.05" rpy="0 0 0"/>
-       <geometry><box size="0.1 0.1 0.1"/></geometry>
-       <material name="blue"><color rgba="0 0 1 1"/></material>
-     </visual>
-     <collision name="cube_collision">
-       <origin xyz="0 0 0.05" rpy="0 0 0"/>
-       <geometry><box size="0.1 0.1 0.1"/></geometry>
-     </collision>
-     <inertial>
-       <mass value="0.5"/>
-       <origin xyz="0 0 0.05" rpy="0 0 0"/>
-       <inertia ixx="0.0008" ixy="0" ixz="0" iyy="0.0008" iyz="0" izz="0.0008"/>
-     </inertial>
-   </link>
-
-   <joint name="chair_2_to_cube" type="fixed">
-     <parent link="chair_2"/>
-     <child link="cube"/>
-     <origin xyz="0 0 0.5" rpy="0 0 0"/>
-   </joint>
-
-   <!-- El Brazo -->
+   <!-- The Arm -->
    <xacro:ur_robot
      name="$(arg name)"
      tf_prefix="$(arg tf_prefix)"
-     parent="chair_1"
+     parent="world"
      joint_limits_parameters_file="$(arg joint_limit_params)"
      kinematics_parameters_file="$(arg kinematics_params)"
      physical_parameters_file="$(arg physical_params)"
-     visual_parameters_file="$(arg visual_params)"
+     visual_parameters_file="$(arg visual_parameters_file)"
      transmission_hw_interface="$(arg transmission_hw_interface)"
      safety_limits="$(arg safety_limits)"
      safety_pos_margin="$(arg safety_pos_margin)"
      safety_k_position="$(arg safety_k_position)"
      sim_ignition="$(arg sim_ignition)" >
-     <origin xyz="0 0 0.5" rpy="0 0 0" />
+     <origin xyz="0 0 0" rpy="0 0 0" />
    </xacro:ur_robot>
 
-   <!-- Gazebo / Ignition ROS 2 Control Plugin -->
+   <!-- Suction Cup Tool -->
+   <link name="suction_cup">
+     <visual>
+       <origin xyz="0 0 0.025" rpy="0 0 0"/>
+       <geometry><cylinder radius="0.03" length="0.05"/></geometry>
+       <material name="dark_grey"><color rgba="0.2 0.2 0.2 1"/></material>
+     </visual>
+     <collision name="suction_cup_collision">
+       <origin xyz="0 0 0.025" rpy="0 0 0"/>
+       <geometry><cylinder radius="0.03" length="0.05"/></geometry>
+     </collision>
+     <inertial>
+       <mass value="0.2"/>
+       <origin xyz="0 0 0.025" rpy="0 0 0"/>
+       <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
+     </inertial>
+   </link>
+
+   <joint name="suction_cup_joint" type="fixed">
+     <parent link="tool0"/>
+     <child link="suction_cup"/>
+     <origin xyz="0 0 0" rpy="0 0 0"/>
+   </joint>
+
+   <!-- Suction Cup TCP -->
+   <link name="suction_cup_tcp"/>
+   <joint name="suction_cup_tcp_joint" type="fixed">
+     <parent link="suction_cup"/>
+     <child link="suction_cup_tcp"/>
+     <origin xyz="0 0 0.05" rpy="0 0 0"/>
+   </joint>
+
+   <!-- Gazebo Plugin for Jazzy -->
    <gazebo>
-     <plugin filename="ign_ros2_control-system" name="ign_ros2_control::IgnitionROS2ControlPlugin">
+     <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimRos2ControlPlugin">
        <parameters>$(arg simulation_controllers)</parameters>
        <controller_manager_node_name>$(arg tf_prefix)controller_manager</controller_manager_node_name>
+     </plugin>
+     
+     <!-- Detachable Joint for Suction Gripper Emulation -->
+     <plugin filename="gz-sim-detachable-joint-system" name="gz::sim::systems::DetachableJoint">
+       <parent_link>suction_cup</parent_link>
+       <child_model>blue_cube</child_model>
+       <child_link>cube_link</child_link>
+       <topic>/model/ur5/detachable_joint</topic>
      </plugin>
    </gazebo>
 

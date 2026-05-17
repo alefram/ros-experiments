@@ -1,0 +1,50 @@
+# ros2_experiments
+
+Repository for experiments and configurations for manipulator robots using **ROS 2 Jazzy Jalisco**.
+
+## Repository Content
+
+- **ur5_setup**: Configuration package for a Universal Robots UR5 arm.
+  - Visualization in RViz.
+  - Physical simulation in Gazebo Sim.
+  - Pre-configured scene with obstacles (chairs and a cube).
+
+## Requirements (Local)
+
+If you decide to run it locally on Jazzy:
+```bash
+sudo apt update
+sudo apt install ros-jazzy-ur-description ros-jazzy-ros-gz-sim ros-jazzy-ros-gz-bridge ros-jazzy-gz-ros2-control
+```
+
+## Docker Setup
+
+This repository includes a Docker Compose configuration to facilitate development in an isolated environment with ROS 2 Jazzy.
+
+### Start the environment:
+```bash
+docker compose up -d
+```
+
+### Enter the container:
+```bash
+docker compose exec ros_dev bash
+```
+
+### Build the workspace inside the container:
+```bash
+colcon build --symlink-install
+source install/setup.bash
+```
+
+## Using ur5_setup
+
+### Simulation in Gazebo:
+```bash
+ros2 launch ur5_setup sim_ur5.launch.py
+```
+
+### Visualization in RViz:
+```bash
+ros2 launch ur5_setup view_ur5.launch.py
+```

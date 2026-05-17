@@ -6,12 +6,9 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
-        - /MotionPlanning1
-        - /MotionPlanning1/Scene Robot1
+        - /RobotModel1
       Splitter Ratio: 0.5
     Tree Height: 557
-  - Class: moveit_rviz_plugin/MotionPlanningPanel
-    Name: Motion Planning
 Visualization Manager:
   Class: ""
   Displays:
@@ -27,17 +24,12 @@ Visualization Manager:
         Value: /robot_description
       Enabled: true
       Name: RobotModel
+      Visual Enabled: true
       Value: true
-    - Class: moveit_rviz_plugin/MotionPlanning
+    - Class: rviz_default_plugins/TF
       Enabled: true
-      Name: MotionPlanning
-      Planning Group: ur_manipulator
-      Request:
-        Planning Group: ur_manipulator
-        Query Goal State: true
-        Query Start State: false
-      Scene Robot:
-        Robot Alpha: 0.5
+      Name: TF
+      Marker Scale: 0.3
       Value: true
   Enabled: true
   Global Options:
