@@ -48,3 +48,27 @@ ros2 launch ur5_setup sim_ur5.launch.py
 ```bash
 ros2 launch ur5_setup view_ur5.launch.py
 ```
+
+### Detachable joint experiment (suction gripper)
+
+The UR5 has a suction cup (`suction_cup` link) and the Gazebo `DetachableJoint` system is
+configured in `urdf/ur5.urdf.xacro` between `suction_cup` and `blue_cube::cube_link`.
+`ros_gz_bridge` exposes it as ROS topics:
+
+| Topic | Type | Effect |
+|-------|------|--------|
+| `/ur5/detachable_joint/attach` | `std_msgs/Empty` | welds the cube to the suction cup |
+| `/ur5/detachable_joint/detach` | `std_msgs/Empty` | releases the cube |
+
+> The plugin welds the cube as soon as it is loaded, so a `detach` has to be sent once at the
+> start (the demo does it) before the arm moves.
+
+The experiment moves above the cube, touches it, **attaches**, lifts it, carries it to the side
+and **detaches** it so it falls to the floor. It also records it with a Gazebo camera:
+
+```bash
+ros2 launch ur5_setup experiment_detachable_joint.launch.py video:=/tmp/detachable_joint.mp4
+# headless:=false to also open the Gazebo GUI
+```
+
+Recorded result: [`docs/detachable_joint_experiment.mp4`](docs/detachable_joint_experiment.mp4).

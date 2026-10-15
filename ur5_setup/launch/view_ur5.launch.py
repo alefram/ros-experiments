@@ -4,6 +4,7 @@ from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
 from launch.substitutions import Command, LaunchConfiguration
 from launch_ros.actions import Node
+from launch_ros.parameter_descriptions import ParameterValue
 
 def generate_launch_description():
     # Get the package directory
@@ -18,8 +19,8 @@ def generate_launch_description():
 
     # Robot State Publisher node
     # Use xacro to process the file
-    robot_description_content = Command(
-        ['xacro ', xacro_file]
+    robot_description_content = ParameterValue(
+        Command(['xacro ', xacro_file, ' sim_ignition:=false']), value_type=str
     )
     
     robot_state_publisher_node = Node(
