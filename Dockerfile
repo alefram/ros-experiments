@@ -8,9 +8,14 @@ RUN apt-get update && apt-get install -y \
     ros-jazzy-ros-gz-sim \
     ros-jazzy-ros-gz-bridge \
     ros-jazzy-gz-ros2-control \
+    ros-jazzy-controller-manager \
+    ros-jazzy-control-msgs \
     ros-jazzy-joint-trajectory-controller \
     ros-jazzy-joint-state-broadcaster \
     ros-jazzy-robot-state-publisher \
+    ros-jazzy-xacro \
+    ros-jazzy-cv-bridge \
+    python3-opencv \
     ros-jazzy-rviz2 \
     ros-jazzy-joint-state-publisher-gui \
     x11-apps \

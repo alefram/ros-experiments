@@ -14,9 +14,14 @@ install(DIRECTORY
   launch
   config
   urdf
-  meshes
   worlds
   DESTINATION share/${PROJECT_NAME}
+)
+
+install(PROGRAMS
+  scripts/detachable_joint_demo.py
+  scripts/record_camera.py
+  DESTINATION lib/${PROJECT_NAME}
 )
 
 if(BUILD_TESTING)

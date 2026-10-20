@@ -12,11 +12,10 @@
    <xacro:include filename="$(find ur_description)/urdf/ur_macro.xacro"/>
 
    <!-- parameters -->
-   <xacro:arg name="joint_limit_params" default="$(find ur_description)/config/ur5/joint_limits.yaml"/>
+   <xacro:arg name="joint_limit_params" default="$(find ur5_setup)/config/ur5_joint_limits.yaml"/>
    <xacro:arg name="kinematics_params" default="$(find ur_description)/config/ur5/default_kinematics.yaml"/>
    <xacro:arg name="physical_params" default="$(find ur_description)/config/ur5/physical_parameters.yaml"/>
    <xacro:arg name="visual_params" default="$(find ur_description)/config/ur5/visual_parameters.yaml"/>
-   <xacro:arg name="transmission_hw_interface" default="hardware_interface/PositionJointInterface"/>
    <xacro:arg name="safety_limits" default="false"/>
    <xacro:arg name="safety_pos_margin" default="0.15"/>
    <xacro:arg name="safety_k_position" default="20"/>
@@ -32,12 +31,11 @@
      joint_limits_parameters_file="$(arg joint_limit_params)"
      kinematics_parameters_file="$(arg kinematics_params)"
      physical_parameters_file="$(arg physical_params)"
-     visual_parameters_file="$(arg visual_parameters_file)"
-     transmission_hw_interface="$(arg transmission_hw_interface)"
+     visual_parameters_file="$(arg visual_params)"
+     force_abs_paths="$(arg sim_ignition)"
      safety_limits="$(arg safety_limits)"
      safety_pos_margin="$(arg safety_pos_margin)"
-     safety_k_position="$(arg safety_k_position)"
-     sim_ignition="$(arg sim_ignition)" >
+     safety_k_position="$(arg safety_k_position)">
      <origin xyz="0 0 0" rpy="0 0 0" />
    </xacro:ur_robot>
 
@@ -65,6 +63,12 @@
      <origin xyz="0 0 0" rpy="0 0 0"/>
    </joint>
 
+   <!-- Keep the suction cup as its own link in SDF (otherwise Gazebo lumps it into
+        wrist_3_link and the DetachableJoint plugin cannot find 'suction_cup') -->
+   <gazebo reference="suction_cup_joint">
+     <preserveFixedJoint>true</preserveFixedJoint>
+   </gazebo>
+
    <!-- Suction Cup TCP -->
    <link name="suction_cup_tcp"/>
    <joint name="suction_cup_tcp_joint" type="fixed">
@@ -73,19 +77,46 @@
      <origin xyz="0 0 0.05" rpy="0 0 0"/>
    </joint>
 
-   <!-- Gazebo Plugin for Jazzy -->
+   <!-- ros2_control hardware interface (Gazebo Sim) -->
+   <ros2_control name="GazeboSimSystem" type="system">
+     <hardware>
+       <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+     </hardware>
+     <xacro:macro name="ur_joint_interface" params="joint initial_value">
+       <joint name="${joint}">
+         <command_interface name="position"/>
+         <state_interface name="position">
+           <param name="initial_value">${initial_value}</param>
+         </state_interface>
+         <state_interface name="velocity"/>
+       </joint>
+     </xacro:macro>
+     <xacro:ur_joint_interface joint="$(arg tf_prefix)shoulder_pan_joint" initial_value="0.0"/>
+     <xacro:ur_joint_interface joint="$(arg tf_prefix)shoulder_lift_joint" initial_value="-1.57"/>
+     <xacro:ur_joint_interface joint="$(arg tf_prefix)elbow_joint" initial_value="1.57"/>
+     <xacro:ur_joint_interface joint="$(arg tf_prefix)wrist_1_joint" initial_value="-1.57"/>
+     <xacro:ur_joint_interface joint="$(arg tf_prefix)wrist_2_joint" initial_value="-1.57"/>
+     <xacro:ur_joint_interface joint="$(arg tf_prefix)wrist_3_joint" initial_value="0.0"/>
+   </ros2_control>
+
    <gazebo>
-     <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimRos2ControlPlugin">
+     <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
        <parameters>$(arg simulation_controllers)</parameters>
-       <controller_manager_node_name>$(arg tf_prefix)controller_manager</controller_manager_node_name>
+       <controller_manager_prefix_node_name>$(arg tf_prefix)controller_manager</controller_manager_prefix_node_name>
      </plugin>
-     
-     <!-- Detachable Joint for Suction Gripper Emulation -->
+
+     <!-- Detachable Joint for Suction Gripper Emulation.
+          Starts detached; ros_gz_bridge exposes the attach/detach topics:
+            /ur5/detachable_joint/attach  (std_msgs/Empty)
+            /ur5/detachable_joint/detach  (std_msgs/Empty)
+            /ur5/detachable_joint/state   (std_msgs/Int32, 1=attached)  -->
      <plugin filename="gz-sim-detachable-joint-system" name="gz::sim::systems::DetachableJoint">
        <parent_link>suction_cup</parent_link>
        <child_model>blue_cube</child_model>
        <child_link>cube_link</child_link>
-       <topic>/model/ur5/detachable_joint</topic>
+       <attach_topic>/ur5/detachable_joint/attach</attach_topic>
+       <detach_topic>/ur5/detachable_joint/detach</detach_topic>
+       <output_topic>/ur5/detachable_joint/state</output_topic>
      </plugin>
    </gazebo>
 

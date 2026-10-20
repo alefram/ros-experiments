@@ -1,14 +1,14 @@
 # ur5_setup
 
-Paquete de configuración para UR5 en ROS 2 Humble.
+Paquete de configuración para UR5 en ROS 2 Jazzy.
 
 ## Requisitos
 
-Asegúrate de tener instalados los paquetes oficiales de UR y MoveIt 2:
+Asegúrate de tener instalados los paquetes oficiales de UR y Gazebo:
 
 ```bash
 sudo apt update
-sudo apt install ros-humble-ur-description ros-humble-ur-moveit-config ros-humble-joint-state-publisher-gui ros-humble-xacro
+sudo apt install ros-jazzy-ur-description ros-jazzy-joint-state-publisher-gui ros-jazzy-xacro ros-jazzy-ros-gz-sim ros-jazzy-gz-ros2-control
 ```
 
 ## Compilación
@@ -28,6 +28,13 @@ Este comando lanzará `robot_state_publisher`, `joint_state_publisher_gui` y `rv
 
 ```bash
 ros2 launch ur5_setup view_ur5.launch.py
+```
+
+### Simulación en Gazebo y experimento de detachable joint
+
+```bash
+ros2 launch ur5_setup sim_ur5.launch.py                 # simulación (headless:=true sin GUI)
+ros2 launch ur5_setup experiment_detachable_joint.launch.py video:=/tmp/demo.mp4
 ```
 
 ## Estructura
