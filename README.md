@@ -72,3 +72,11 @@ ros2 launch ur5_setup experiment_detachable_joint.launch.py video:=/tmp/detachab
 ```
 
 Recorded result: [`docs/detachable_joint_experiment.mp4`](docs/detachable_joint_experiment.mp4).
+
+#### Elbow locked "up"
+
+`ur5_setup/config/ur5_joint_limits.yaml` (used by the xacro) limits `shoulder_lift_joint <= -0.1 rad`
+and `elbow_joint >= 0 rad`, so the arm always stays in the elbow-up configuration. The demo also
+checks with forward kinematics, before moving, that the elbow stays above the `wrist_3` plane along
+the whole path (measured in Gazebo: always >= 6.8 cm above it). The suction cup touches the cube
+(about 5 mm gap) before `attach`, so the cube is welded right at the tool.

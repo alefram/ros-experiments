@@ -72,14 +72,16 @@ def generate_launch_description():
     joint_state_broadcaster_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["joint_state_broadcaster", "--param-file", controllers_file],
+        arguments=["joint_state_broadcaster", "--param-file", controllers_file,
+                   "--controller-manager-timeout", "120", "--switch-timeout", "60"],
         parameters=[{'use_sim_time': True}],
     )
 
     ur_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["ur_joint_trajectory_controller", "--param-file", controllers_file],
+        arguments=["ur_joint_trajectory_controller", "--param-file", controllers_file,
+                   "--controller-manager-timeout", "120", "--switch-timeout", "60"],
         parameters=[{'use_sim_time': True}],
     )
 

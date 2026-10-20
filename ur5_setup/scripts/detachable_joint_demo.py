@@ -2,10 +2,10 @@
 """Pick & drop experiment with the Gazebo DetachableJoint (suction gripper emulation).
 
 Sequence: move above the cube -> touch it -> ATTACH -> lift -> carry -> DETACH (cube drops).
-Waypoints are joint-space solutions (tool pointing down) of the TCP targets listed below,
+Waypoints are joint-space solutions (tool pointing down, elbow up) of the TCP targets listed below,
 expressed in the robot base frame (the cube top is at z=0.10 m).
 """
-import time
+import math
 
 import rclpy
 from control_msgs.action import FollowJointTrajectory
@@ -18,10 +18,47 @@ JOINTS = ['shoulder_pan_joint', 'shoulder_lift_joint', 'elbow_joint',
           'wrist_1_joint', 'wrist_2_joint', 'wrist_3_joint']
 
 HOME = [0.0, -1.57, 1.57, -1.57, -1.57, 0.0]
-PRE_GRASP = [-0.137, -0.027, -0.774, -0.770, -1.571, -0.456]   # TCP (0.80, 0.00, 0.25)
-GRASP = [-0.137, 0.254, -1.006, -0.819, -1.571, -1.041]        # TCP (0.80, 0.00, 0.118)
-LIFT = [-0.137, -0.321, -0.400, -0.850, -1.571, -0.282]        # TCP (0.80, 0.00, 0.35)
-CARRY = [0.570, -0.068, -1.124, -0.379, -1.571, -0.615]        # TCP (0.50, 0.45, 0.35)
+PRE_GRASP = [-0.137, -0.768, 0.774, -1.576, -1.571, 0.0]   # TCP (0.80, 0.00, 0.25)
+GRASP = [-0.137, -0.697, 1.020, -1.894, -1.571, 0.0]       # TCP (0.80, 0.00, 0.105)
+LIFT = [-0.137, -0.765, 0.691, -1.497, -1.571, 0.0]        # TCP (0.80, 0.00, 0.28)
+CARRY = [0.570, -1.129, 1.286, -1.727, -1.571, 0.0]        # TCP (0.50, 0.45, 0.28)
+
+# UR5 DH parameters, used to check that the elbow always stays above the wrist_3 plane
+_D = [0.089159, 0.0, 0.0, 0.10915, 0.09465, 0.0823]
+_A = [0.0, -0.425, -0.39225, 0.0, 0.0, 0.0]
+_ALPHA = [math.pi / 2, 0.0, 0.0, math.pi / 2, -math.pi / 2, 0.0]
+
+
+def _dh(theta, i):
+    ct, st = math.cos(theta), math.sin(theta)
+    ca, sa = math.cos(_ALPHA[i]), math.sin(_ALPHA[i])
+    return [[ct, -st * ca, st * sa, _A[i] * ct],
+            [st, ct * ca, -ct * sa, _A[i] * st],
+            [0.0, sa, ca, _D[i]],
+            [0.0, 0.0, 0.0, 1.0]]
+
+
+def _matmul(a, b):
+    return [[sum(a[i][k] * b[k][j] for k in range(4)) for j in range(4)] for i in range(4)]
+
+
+def elbow_above_wrist3(q):
+    """Height of the elbow joint above the wrist_3 (flange) plane, in metres (base frame)."""
+    m = _dh(q[0], 0)
+    m = _matmul(m, _dh(q[1], 1))
+    elbow_z = m[2][3]
+    for i in range(2, 6):
+        m = _matmul(m, _dh(q[i], i))
+    return elbow_z - m[2][3]
+
+
+def check_elbow_up(waypoints, margin=0.02):
+    """Refuse to run if the (linearly interpolated) path puts the elbow below wrist_3."""
+    for a, b in zip(waypoints[:-1], waypoints[1:]):
+        for k in range(51):
+            q = [x + (y - x) * k / 50 for x, y in zip(a, b)]
+            if elbow_above_wrist3(q) < margin:
+                raise RuntimeError(f'elbow would go below the wrist_3 plane at q={q}')
 
 
 class DetachableJointDemo(Node):
@@ -59,6 +96,7 @@ class DetachableJointDemo(Node):
         return result_future.result().result.error_code
 
     def run(self):
+        check_elbow_up([HOME, PRE_GRASP, GRASP, LIFT, CARRY, HOME])
         self.get_logger().info('Waiting for the trajectory controller...')
         self.client.wait_for_server()
         # Wait for the simulation clock and for the bridge to be connected
