@@ -73,7 +73,7 @@ def generate_launch_description():
         package="controller_manager",
         executable="spawner",
         arguments=["joint_state_broadcaster", "--param-file", controllers_file,
-                   "--controller-manager-timeout", "120", "--switch-timeout", "60"],
+                   "--controller-manager-timeout", "120", "--switch-timeout", "300"],
         parameters=[{'use_sim_time': True}],
     )
 
@@ -81,7 +81,7 @@ def generate_launch_description():
         package="controller_manager",
         executable="spawner",
         arguments=["ur_joint_trajectory_controller", "--param-file", controllers_file,
-                   "--controller-manager-timeout", "120", "--switch-timeout", "60"],
+                   "--controller-manager-timeout", "120", "--switch-timeout", "300"],
         parameters=[{'use_sim_time': True}],
     )
 
