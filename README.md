@@ -73,6 +73,10 @@ ros2 launch ur5_setup experiment_detachable_joint.launch.py video:=/tmp/detachab
 
 Recorded result: [`docs/detachable_joint_experiment.mp4`](docs/detachable_joint_experiment.mp4).
 
+Structure of the detachable joint (ROS 2 nodes, bridge topics, Gazebo plugin, link hierarchy and states):
+
+![DetachableJoint structure](docs/detachable_joint_structure.png)
+
 #### Elbow locked "up"
 
 `ur5_setup/config/ur5_joint_limits.yaml` (used by the xacro) limits `shoulder_lift_joint <= -0.1 rad`
