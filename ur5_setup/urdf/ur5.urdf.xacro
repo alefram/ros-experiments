@@ -106,7 +106,8 @@
      </plugin>
 
      <!-- Detachable Joint for Suction Gripper Emulation.
-          Starts detached; ros_gz_bridge exposes the attach/detach topics:
+          NOTE: the plugin welds the cube to the cup as soon as it loads, so send a
+          detach first (the demo does it). ros_gz_bridge exposes the topics:
             /ur5/detachable_joint/attach  (std_msgs/Empty)
             /ur5/detachable_joint/detach  (std_msgs/Empty)
             /ur5/detachable_joint/state   (std_msgs/Int32, 1=attached)  -->
