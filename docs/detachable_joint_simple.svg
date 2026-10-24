@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="800" viewBox="0 0 1600 800" font-family="Helvetica, Arial, sans-serif">
+<rect width="1600" height="800" fill="#000"/>
+<text x="800.0" y="70" text-anchor="middle" font-size="30" font-weight="300" letter-spacing="6" fill="#fff">HOW THE DETACHABLE JOINT WORKS</text>
+<line x1="730.0" y1="92" x2="870.0" y2="92" stroke="#2f80ff" stroke-width="2"/>
+<text x="800.0" y="135" text-anchor="middle" font-size="17" fill="#8a8a8a">A fixed joint is created between the suction cup and the cube, and removed on command.</text>
+<text x="210" y="250" text-anchor="middle" font-size="22" letter-spacing="4" fill="#fff">01 · START</text>
+<text x="210" y="280" text-anchor="middle" font-size="16" fill="#2f80ff"></text>
+<line x1="25" y1="600" x2="395" y2="600" stroke="#3a3a3a" stroke-width="1.5"/>
+<rect x="85" y="540" width="90" height="60" fill="none" stroke="#8a8a8a" stroke-width="1.5"/>
+<rect x="285" y="540" width="90" height="60" fill="none" stroke="#8a8a8a" stroke-width="1.5"/>
+<rect x="108" y="513" width="44" height="27" fill="#000" stroke="#fff" stroke-width="2"/>
+<line x1="130.0" y1="513.0" x2="213.0" y2="415.6" stroke="#fff" stroke-width="16" stroke-linecap="round"/><line x1="130.0" y1="513.0" x2="213.0" y2="415.6" stroke="#000" stroke-width="13" stroke-linecap="round"/>
+<line x1="213.0" y1="415.6" x2="330.0" y2="400.0" stroke="#fff" stroke-width="16" stroke-linecap="round"/><line x1="213.0" y1="415.6" x2="330.0" y2="400.0" stroke="#000" stroke-width="13" stroke-linecap="round"/>
+<line x1="330.0" y1="400.0" x2="330.0" y2="427.0" stroke="#fff" stroke-width="12" stroke-linecap="round"/><line x1="330.0" y1="400.0" x2="330.0" y2="427.0" stroke="#000" stroke-width="9" stroke-linecap="round"/>
+<rect x="316.0" y="427.0" width="28" height="18" rx="4" fill="#000" stroke="#fff" stroke-width="2"/>
+<circle cx="130.0" cy="513.0" r="9" fill="#000" stroke="#fff" stroke-width="2"/>
+<circle cx="213.0" cy="415.6" r="9" fill="#000" stroke="#fff" stroke-width="2"/>
+<circle cx="330.0" cy="400.0" r="7" fill="#000" stroke="#fff" stroke-width="2"/>
+<rect x="315.0" y="510.0" width="30.0" height="30.0" fill="#2f80ff"/>
+<text x="210" y="665" text-anchor="middle" font-size="15" letter-spacing="3" fill="#8a8a8a">DETACHED</text>
+<text x="210" y="691" text-anchor="middle" font-size="15" fill="#8a8a8a">cube rests on the chair</text>
+<text x="405" y="450" font-size="26" fill="#3a3a3a">›</text>
+<text x="605" y="250" text-anchor="middle" font-size="22" letter-spacing="4" fill="#fff">02 · ATTACH</text>
+<text x="605" y="280" text-anchor="middle" font-size="16" fill="#2f80ff">send “attach”</text>
+<line x1="420" y1="600" x2="790" y2="600" stroke="#3a3a3a" stroke-width="1.5"/>
+<rect x="480" y="540" width="90" height="60" fill="none" stroke="#8a8a8a" stroke-width="1.5"/>
+<rect x="680" y="540" width="90" height="60" fill="none" stroke="#8a8a8a" stroke-width="1.5"/>
+<rect x="503" y="513" width="44" height="27" fill="#000" stroke="#fff" stroke-width="2"/>
+<line x1="525.0" y1="513.0" x2="614.8" y2="421.8" stroke="#fff" stroke-width="16" stroke-linecap="round"/><line x1="525.0" y1="513.0" x2="614.8" y2="421.8" stroke="#000" stroke-width="13" stroke-linecap="round"/>
+<line x1="614.8" y1="421.8" x2="725.0" y2="464.0" stroke="#fff" stroke-width="16" stroke-linecap="round"/><line x1="614.8" y1="421.8" x2="725.0" y2="464.0" stroke="#000" stroke-width="13" stroke-linecap="round"/>
+<line x1="725.0" y1="464.0" x2="725.0" y2="491.0" stroke="#fff" stroke-width="12" stroke-linecap="round"/><line x1="725.0" y1="464.0" x2="725.0" y2="491.0" stroke="#000" stroke-width="9" stroke-linecap="round"/>
+<rect x="711.0" y="491.0" width="28" height="18" rx="4" fill="#000" stroke="#fff" stroke-width="2"/>
+<circle cx="525.0" cy="513.0" r="9" fill="#000" stroke="#fff" stroke-width="2"/>
+<circle cx="614.8" cy="421.8" r="9" fill="#000" stroke="#fff" stroke-width="2"/>
+<circle cx="725.0" cy="464.0" r="7" fill="#000" stroke="#fff" stroke-width="2"/>
+<rect x="710.0" y="510.0" width="30.0" height="30.0" fill="#2f80ff"/>
+<line x1="725.0" y1="509.0" x2="725.0" y2="510.0" stroke="#fff" stroke-width="5"/>
+<circle cx="725.0" cy="509.0" r="22" fill="none" stroke="#2f80ff" stroke-width="2"/>
+<line x1="747.0" y1="509.0" x2="795.0" y2="517.0" stroke="#2f80ff" stroke-width="1.5"/>
+<text x="801.0" y="522.0" font-size="15" fill="#2f80ff">fixed joint</text>
+<text x="605" y="665" text-anchor="middle" font-size="15" letter-spacing="3" fill="#fff">ATTACHED</text>
+<text x="605" y="691" text-anchor="middle" font-size="15" fill="#8a8a8a">cup touches the cube: joint created</text>
+<text x="800" y="450" font-size="26" fill="#3a3a3a">›</text>
+<text x="1000" y="250" text-anchor="middle" font-size="22" letter-spacing="4" fill="#fff">03 · CARRY</text>
+<text x="1000" y="280" text-anchor="middle" font-size="16" fill="#2f80ff"></text>
+<line x1="815" y1="600" x2="1185" y2="600" stroke="#3a3a3a" stroke-width="1.5"/>
+<rect x="875" y="540" width="90" height="60" fill="none" stroke="#8a8a8a" stroke-width="1.5"/>
+<rect x="1075" y="540" width="90" height="60" fill="none" stroke="#8a8a8a" stroke-width="1.5"/>
+<rect x="898" y="513" width="44" height="27" fill="#000" stroke="#fff" stroke-width="2"/>
+<line x1="920.0" y1="513.0" x2="923.7" y2="385.1" stroke="#fff" stroke-width="16" stroke-linecap="round"/><line x1="920.0" y1="513.0" x2="923.7" y2="385.1" stroke="#000" stroke-width="13" stroke-linecap="round"/>
+<line x1="923.7" y1="385.1" x2="1040.0" y2="365.0" stroke="#fff" stroke-width="16" stroke-linecap="round"/><line x1="923.7" y1="385.1" x2="1040.0" y2="365.0" stroke="#000" stroke-width="13" stroke-linecap="round"/>
+<line x1="1040.0" y1="365.0" x2="1040.0" y2="392.0" stroke="#fff" stroke-width="12" stroke-linecap="round"/><line x1="1040.0" y1="365.0" x2="1040.0" y2="392.0" stroke="#000" stroke-width="9" stroke-linecap="round"/>
+<rect x="1026.0" y="392.0" width="28" height="18" rx="4" fill="#000" stroke="#fff" stroke-width="2"/>
+<circle cx="920.0" cy="513.0" r="9" fill="#000" stroke="#fff" stroke-width="2"/>
+<circle cx="923.7" cy="385.1" r="9" fill="#000" stroke="#fff" stroke-width="2"/>
+<circle cx="1040.0" cy="365.0" r="7" fill="#000" stroke="#fff" stroke-width="2"/>
+<rect x="1025.0" y="411.0" width="30.0" height="30.0" fill="#2f80ff"/>
+<line x1="1040.0" y1="410.0" x2="1040.0" y2="411.0" stroke="#fff" stroke-width="5"/>
+<circle cx="1040.0" cy="410.0" r="22" fill="none" stroke="#2f80ff" stroke-width="2"/>
+<line x1="1062.0" y1="410.0" x2="1110.0" y2="418.0" stroke="#2f80ff" stroke-width="1.5"/>
+<text x="1116.0" y="423.0" font-size="15" fill="#2f80ff">fixed joint</text>
+<text x="1000" y="665" text-anchor="middle" font-size="15" letter-spacing="3" fill="#fff">ATTACHED</text>
+<text x="1000" y="691" text-anchor="middle" font-size="15" fill="#8a8a8a">the cube follows the cup</text>
+<text x="1195" y="450" font-size="26" fill="#3a3a3a">›</text>
+<text x="1395" y="250" text-anchor="middle" font-size="22" letter-spacing="4" fill="#fff">04 · DETACH</text>
+<text x="1395" y="280" text-anchor="middle" font-size="16" fill="#2f80ff">send “detach”</text>
+<line x1="1210" y1="600" x2="1580" y2="600" stroke="#3a3a3a" stroke-width="1.5"/>
+<rect x="1270" y="540" width="90" height="60" fill="none" stroke="#8a8a8a" stroke-width="1.5"/>
+<rect x="1470" y="540" width="90" height="60" fill="none" stroke="#8a8a8a" stroke-width="1.5"/>
+<rect x="1293" y="513" width="44" height="27" fill="#000" stroke="#fff" stroke-width="2"/>
+<line x1="1315.0" y1="513.0" x2="1318.7" y2="385.1" stroke="#fff" stroke-width="16" stroke-linecap="round"/><line x1="1315.0" y1="513.0" x2="1318.7" y2="385.1" stroke="#000" stroke-width="13" stroke-linecap="round"/>
+<line x1="1318.7" y1="385.1" x2="1435.0" y2="365.0" stroke="#fff" stroke-width="16" stroke-linecap="round"/><line x1="1318.7" y1="385.1" x2="1435.0" y2="365.0" stroke="#000" stroke-width="13" stroke-linecap="round"/>
+<line x1="1435.0" y1="365.0" x2="1435.0" y2="392.0" stroke="#fff" stroke-width="12" stroke-linecap="round"/><line x1="1435.0" y1="365.0" x2="1435.0" y2="392.0" stroke="#000" stroke-width="9" stroke-linecap="round"/>
+<rect x="1421.0" y="392.0" width="28" height="18" rx="4" fill="#000" stroke="#fff" stroke-width="2"/>
+<circle cx="1315.0" cy="513.0" r="9" fill="#000" stroke="#fff" stroke-width="2"/>
+<circle cx="1318.7" cy="385.1" r="9" fill="#000" stroke="#fff" stroke-width="2"/>
+<circle cx="1435.0" cy="365.0" r="7" fill="#000" stroke="#fff" stroke-width="2"/>
+<rect x="1420.0" y="520.0" width="30.0" height="30.0" fill="#2f80ff"/>
+<line x1="1426.0" y1="486.0" x2="1426.0" y2="508.0" stroke="#8a8a8a" stroke-width="1.5" stroke-dasharray="2 5"/>
+<line x1="1435.0" y1="486.0" x2="1435.0" y2="508.0" stroke="#8a8a8a" stroke-width="1.5" stroke-dasharray="2 5"/>
+<line x1="1444.0" y1="486.0" x2="1444.0" y2="508.0" stroke="#8a8a8a" stroke-width="1.5" stroke-dasharray="2 5"/>
+<line x1="1423.0" y1="418.0" x2="1447.0" y2="418.0" stroke="#8a8a8a" stroke-width="1.5" stroke-dasharray="3 4"/>
+<text x="1461.0" y="423.0" font-size="15" fill="#8a8a8a">joint removed</text>
+<text x="1395" y="665" text-anchor="middle" font-size="15" letter-spacing="3" fill="#8a8a8a">DETACHED</text>
+<text x="1395" y="691" text-anchor="middle" font-size="15" fill="#8a8a8a">joint removed: the cube falls</text>
+<text x="800.0" y="758" text-anchor="middle" font-size="13" fill="#555">the plugin welds the cube as soon as it loads — release it first with “detach”, then touch the cube before “attach”</text>
+</svg>
